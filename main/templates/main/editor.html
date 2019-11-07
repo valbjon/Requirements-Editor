@@ -1,0 +1,263 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div>
+
+    <div class="left" id="left">
+
+        <div class="dv1" id="20">
+        </div>
+
+        <div class="dv2" id="21">
+        </div>
+
+        <div class="dv3" id="22">
+        </div>
+
+        <div class="dv4" id="23">
+        </div>
+
+        <div class="dv5" id="24">
+        </div>
+
+        <div class="dv6" id="25">
+        </div>
+
+        <div class="dv7" id="26">
+        </div>
+
+    </div>
+
+</div>
+
+<div class="right">
+    </br></br></br></br>
+    <img src="/media/images/b.png">
+    <div class="left col-md-12">
+        <button type="button" class="btn btn-default btn-sm helpButton">
+        <span class="glyphicon glyphicon-question-sig"></span> Help
+        </button>
+        <div class="help-block">
+            <div class="help" style="display:none">
+                {% for help in project.template.block_types.all %}
+                    <div class="guide">
+                        <h5>{{help.name}}</h5>
+                        <p>{{help.guide | safe}}</p>
+                    </div>
+                    <hr>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+    <p>Requirements</p>
+    <form method="post">
+        {% csrf_token %}
+        {{ formset.management_form|crispy }}
+         <div class="form-row">
+             {% for form in formset %}
+             <div class="col">
+                 {{form| crispy }}
+             </div>
+        {% endfor %}
+         </div>
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+</br>
+</div>
+
+<p>
+    <div class="list-group">
+        {% for requirement in project.requirements.all %}
+            <li class="list-group-item clearfix">
+                {% for rb in requirement.requirement_blocks.all %}
+                    {{rb.value}}
+                {% endfor%}
+                <p>
+                    <span class="float-right">
+                        <p>
+                            <a href="{% url 'editor-update' slug=project.slug pk=requirement.pk%}">
+                                <button type="button" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-edit"></span> Edit
+                                </button>
+                            </a>
+                            <a href="{% url 'editor-delete' slug=project.slug pk=requirement.pk%}">
+                                <button type="button" class="btn btn-default btn-sm">
+                                    <span class="glyphicon glyphicon-remove"></span> Delete
+                                </button>
+                            </a>
+                        </p>
+                    </span>
+                </p>
+             </li>
+
+        {% endfor%}
+    </div>
+</p>
+
+<script>
+    $('.helpButton').click(function(){
+        if($('.help').is(':visible')){
+        $('.help').hide();
+    }
+    else {
+        $('.help').show();
+    }
+    });
+    var counter0 = 0;
+    var counter1 = 0;
+    var counter2 = 0;
+    var counter3 = 0;
+    var counter4 = 0;
+    var counter5 = 0;
+    var counter6 = 0;
+    {% for block_type in project.template.block_types.all %}
+        name = '{{block_type.name}}';
+        pos = '{{block_type.position}}';
+        kind = '{{block_type.kind}}';
+        deleteAfterSave = '{{block_type.deleteAfterSave}}';
+        {% for text_block in  block_type.text_blocks.all%}
+            text = '{{ text_block.text}}';
+            switch (pos){
+                case '0':
+                    counter0 += 1;
+                    if (counter0 < 6){
+                        if (kind == 'C' || kind =='FF'){
+                            document.getElementById("id_requirement_blocks-0-value").value = '{{text_block.text}}';
+                        }
+                        var element = document.createElement("button");
+                        element.innerHTML = text;
+                        element.setAttribute("class", "myButton");
+                        element.setAttribute("id", "{{forloop.counter}}");
+                        element.setAttribute("value", "{{text_block.text}}");
+                        document.getElementById("20").appendChild(element);
+                    }
+                    break;
+                case '1':
+                    counter1 += 1;
+                    if (counter1 < 6){
+                        if (kind == 'C' || kind =='FF'){
+                            document.getElementById("id_requirement_blocks-1-value").value = '{{text_block.text}}';
+                        }
+                        var element = document.createElement("button");
+                        element.innerHTML = text;
+                        element.setAttribute("class", "myButton");
+                        element.setAttribute("id", "{{forloop.counter}}");
+                        element.setAttribute("value", "{{text_block.text}}");
+                        document.getElementById("21").appendChild(element);
+                    }
+                    break;
+                case '2':
+                    counter2 += 1;
+                    if (counter2 < 6){
+                        if (kind == 'C' || kind =='FF'){
+                            document.getElementById("id_requirement_blocks-2-value").value = '{{text_block.text}}';
+                        }
+                        var element = document.createElement("button");
+                        element.innerHTML = text;
+                        element.setAttribute("class", "myButton");
+                        element.setAttribute("id", "{{forloop.counter}}");
+                        element.setAttribute("value", "{{text_block.text}}");
+                        document.getElementById("22").appendChild(element);
+                    }
+                    break;
+                case '3':
+                    counter3 += 1;
+                    if (counter3 < 6){
+                        if (kind == 'C' || kind =='FF'){
+                            document.getElementById("id_requirement_blocks-3-value").value = '{{text_block.text}}';
+                        }
+                        var element = document.createElement("button");
+                        element.innerHTML = text;
+                        element.setAttribute("class", "myButton");
+                        element.setAttribute("onlick", "colorChange()");
+                        element.setAttribute("id", "{{forloop.counter}}");
+                        element.setAttribute("value", "{{text_block.text}}");
+                        document.getElementById("23").appendChild(element);
+                    }
+                    break;
+                case '4':
+                    counter4 += 1
+                    if (counter4 < 6){
+                        if (kind == 'C' || kind =='FF'){
+                            document.getElementById("id_requirement_blocks-4-value").value = '{{text_block.text}}';
+                        }
+                        var element = document.createElement("button");
+                        element.innerHTML = text;
+                        element.setAttribute("class", "myButton");
+                        element.setAttribute("id", "{{forloop.counter}}");
+                        element.setAttribute("value", "{{text_block.text}}");
+                        document.getElementById("24").appendChild(element);
+                    }
+                    break;
+                case '5':
+                    counter5 += 1;
+                    if(counter5 < 6){
+                        if (kind == 'C' || kind =='FF'){
+                            document.getElementById("id_requirement_blocks-5-value").value = '{{text_block.text}}';
+                         }
+                        var element = document.createElement("button");
+                        element.innerHTML = text;
+                        element.setAttribute("class", "myButton");
+                        element.setAttribute("id", "{{forloop.counter}}");
+                        element.setAttribute("value", "{{text_block.text}}");
+                        document.getElementById("25").appendChild(element);
+                    }
+                    break;
+                case '6':
+                    counter6 += 1;
+                    if (counter6 < 6){
+                        if (kind == 'C' || kind =='FF'){
+                            document.getElementById("id_requirement_blocks-6-value").value = '{{text_block.text}}';
+                        }
+                        var element = document.createElement("button");
+                        element.innerHTML = text;
+                        element.setAttribute("class", "myButton");
+                        element.setAttribute("id", "{{forloop.counter}}");
+                        element.setAttribute("value", "{{text_block.text}}");
+                        document.getElementById("26").appendChild(element);
+                    }
+                    break;
+            }
+        {% endfor %}
+    {% endfor %}
+    $(".myButton").click(function() {
+        var divId = $(this).parent().attr('id');
+        switch (divId){
+            case '20':
+                document.getElementById("id_requirement_blocks-0-value").value = this.value;
+                break;
+            case '21':
+                document.getElementById("id_requirement_blocks-1-value").value = this.value;
+                break;
+            case '22':
+                document.getElementById("id_requirement_blocks-2-value").value = this.value;
+                break;
+            case '23':
+                document.getElementById("id_requirement_blocks-3-value").value = this.value;
+                break;
+            case '24':
+                document.getElementById("id_requirement_blocks-4-value").value = this.value;
+                break;
+            case '25':
+                document.getElementById("id_requirement_blocks-5-value").value = this.value;
+                break;
+            case '26':
+                document.getElementById("id_requirement_blocks-6-value").value = this.value;
+                break;
+        }
+    });
+    $(".save btn btn-default").click(function() {
+        i = 0;
+        {% for block_type in project.template.block_types.all %}
+            if ({{block_type.deleteAfterSave}} == True){
+                document.getElementById("id_requirement_blocks-+i+-value").value = "";
+            }
+            i += 1;
+        {% endfor %}
+    });
+</script>
+{% endblock content %}

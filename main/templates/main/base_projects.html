@@ -1,0 +1,20 @@
+{% extends "main/base.html" %}
+
+{% block content%}
+    <h3>Projects</h3>
+    <div class="row mt-5">
+        {% for project in projects %}
+        <div class="card text-right" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title">{{project.name}}</h5>
+                {% block delete%} {% endblock delete%}
+                <a href="{% url 'editor-create' slug=project.slug %}" class="btn btn-info stretched-link"> Select</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div style="text-align:right; width:100%; padding:0.5em;">
+        <a href="{% url 'project-create' %}" class="btn text-right btn-info">Add</a>
+    </div>
+
+{% endblock content %}

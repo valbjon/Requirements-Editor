@@ -1,0 +1,16 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+    <h3>{{ template.name}}</h3>
+    <p> {{ template.guide}}</p>
+    <h4>Blocks:</h4>
+    {% for block_type in template.block_types.all %}
+    <p>{{ block_type.name}}
+        {{ block_type.kind }}
+        {{ block_type.text }}<p>
+    {% endfor %}
+    <img src="{{template.image.url}}">
+
+
+
+{% endblock content %}

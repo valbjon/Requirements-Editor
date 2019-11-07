@@ -1,0 +1,20 @@
+{% extends "main/base.html" %}
+
+{% block content%}
+    <h3>Templates</h3>
+     <class="row mt-5">
+        {% for template in templates %}
+        <div class="card text-right">
+            <img src="{{template.image.url}}" class="card-img-top" alt="no image">
+            <div class="card-body">
+                <h5 class="card-title">{{template.name}}</h5>
+                <p class "card-text">{{template.guide}}</p>
+                <a href="{% url 'template-detail' pk=template.pk %}" class="card-link">Info</a>
+                {%block select%}
+                {% endblock select %}
+                {# <a href="{% url 'main-projects' %}" class="btn btn-info stretched-link">Select</a> #}
+            </div>
+        </div>
+        {% endfor %}
+{% endblock content %}
+

@@ -1,0 +1,4 @@
+ {% extends "main/templates.html" %}
+ {% block select %}
+    <a href="{% url 'submit-template' slug=project.slug pk_t=template.pk %}" class="btn btn-info stretched-link">Select</a>
+ {% endblock select %}

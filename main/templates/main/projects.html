@@ -1,0 +1,5 @@
+{% extends "main/base_projects.html" %}
+
+{% block delete%}
+<a href="{% url 'delete-project' slug=project.slug %}" class="btn btn-info stretched-link"> Delete</a>
+{% endblock delete %}
